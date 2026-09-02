@@ -1,0 +1,6 @@
+{
+  "name": "Chocoberry Events & Catering",
+  "description": "Premium fusion catering & event experiences across DC, Maryland & Virginia. Unforgettable events and exceptional catering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
