@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Sparkles, Phone, Utensils, Cake, Calendar, ChevronRight } from 'lucide-react';
 
 interface NavbarProps {
-  currentPage: 'home' | 'about' | 'gallery' | 'menu' | 'set-menu' | 'dessert-bar';
-  onNavigate: (page: 'home' | 'about' | 'gallery' | 'menu' | 'set-menu' | 'dessert-bar') => void;
+  currentPage: 'home' | 'about' | 'gallery' | 'menu' | 'set-menu' | 'dessert-bar' | 'contact';
+  onNavigate: (page: 'home' | 'about' | 'gallery' | 'menu' | 'set-menu' | 'dessert-bar' | 'contact') => void;
   onOpenQuote: (serviceTitle?: string) => void;
   onOpenMenu: (categoryName?: string) => void;
   onOpenGallery: () => void;
@@ -32,7 +32,7 @@ export default function Navbar({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (page: 'home' | 'about' | 'gallery' | 'menu' | 'set-menu' | 'dessert-bar', sectionId?: string) => {
+  const handleNavClick = (page: 'home' | 'about' | 'gallery' | 'menu' | 'set-menu' | 'dessert-bar' | 'contact', sectionId?: string) => {
     setMobileMenuOpen(false);
     onNavigate(page);
     if (sectionId) {
@@ -50,13 +50,7 @@ export default function Navbar({
   };
 
   const handleContactScroll = () => {
-    setMobileMenuOpen(false);
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      onOpenQuote();
-    }
+    handleNavClick('contact');
   };
 
   return (
@@ -183,9 +177,16 @@ export default function Navbar({
             {/* Contact */}
             <button
               onClick={handleContactScroll}
-              className="px-3 py-1.5 rounded-full hover:text-[#dfba73] hover:bg-white/5 transition-colors uppercase tracking-widest text-xs"
+              className={`px-3.5 py-1.5 rounded-full uppercase tracking-widest text-xs transition-all duration-200 flex items-center gap-1.5 ${
+                currentPage === 'contact'
+                  ? 'text-[#0c0c0e] bg-gradient-to-r from-[#dfba73] to-[#cba04e] font-bold shadow-md shadow-[#cba04e]/20'
+                  : 'hover:text-[#dfba73] hover:bg-white/5'
+              }`}
             >
-              CONTACT
+              <span>CONTACT</span>
+              {currentPage === 'contact' && (
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0c0c0e]" />
+              )}
             </button>
           </nav>
 
@@ -322,10 +323,16 @@ export default function Navbar({
               {/* Contact */}
               <button
                 onClick={handleContactScroll}
-                className="text-left py-2 px-3 rounded-lg text-gray-200 hover:text-[#dfba73] flex justify-between items-center"
+                className={`text-left py-2 px-3 rounded-lg flex justify-between items-center ${
+                  currentPage === 'contact'
+                    ? 'bg-gradient-to-r from-[#dfba73] to-[#cba04e] text-[#0c0c0e] font-bold shadow-md'
+                    : 'text-gray-200 hover:text-[#dfba73]'
+                }`}
               >
                 <span>CONTACT US</span>
-                <ChevronRight className="w-4 h-4 opacity-70" />
+                <span className="text-[10px] uppercase font-bold tracking-widest bg-black/20 px-2 py-0.5 rounded">
+                  24/7 INQUIRY
+                </span>
               </button>
 
               {/* Action Button */}

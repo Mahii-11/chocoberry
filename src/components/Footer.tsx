@@ -2,12 +2,17 @@ import { Sparkles, Phone, Mail, Clock, MapPin, Facebook, Instagram, Share2, Glob
 import { FOOTER_DATA } from '../data/cateringData';
 
 interface FooterProps {
-  onNavigate?: (page: 'home' | 'about' | 'gallery' | 'menu' | 'set-menu' | 'dessert-bar') => void;
+  onNavigate?: (page: 'home' | 'about' | 'gallery' | 'menu' | 'set-menu' | 'dessert-bar' | 'contact') => void;
 }
 
 export default function Footer({ onNavigate }: FooterProps) {
   const scrollToSection = (href: string, label?: string) => {
     const l = label?.toLowerCase() || '';
+    if (l.includes('contact') && onNavigate) {
+      onNavigate('contact');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     if (l === 'gallery' && onNavigate) {
       onNavigate('gallery');
       window.scrollTo({ top: 0, behavior: 'smooth' });

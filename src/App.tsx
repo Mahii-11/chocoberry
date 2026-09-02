@@ -5,6 +5,7 @@ import GalleryPage from './components/GalleryPage';
 import FusionMenuPage from './components/FusionMenuPage';
 import SetMenuPage from './components/SetMenuPage';
 import DessertBarPage from './components/DessertBarPage';
+import ContactPage from './components/ContactPage';
 
 // Home Page Sections
 import HeroSection from './components/HeroSection';
@@ -27,8 +28,8 @@ import { ServiceItem, MenuCategory, GalleryItem } from './types';
 import { MENU_CATEGORIES } from './data/cateringData';
 
 export default function App() {
-  // Page View State: defaults to 'dessert-bar' per user's focused request
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'gallery' | 'menu' | 'set-menu' | 'dessert-bar'>('dessert-bar');
+  // Page View State: defaults to 'contact' per user's focused request
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'gallery' | 'menu' | 'set-menu' | 'dessert-bar' | 'contact'>('contact');
 
   // Modal States
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -97,7 +98,10 @@ export default function App() {
 
       {/* Main Content Body */}
       <main className="flex-grow">
-        {currentPage === 'dessert-bar' ? (
+        {currentPage === 'contact' ? (
+          /* =================== CONTACT & INQUIRY PAGE =================== */
+          <ContactPage onOpenQuote={(summary) => handleOpenQuote(summary)} />
+        ) : currentPage === 'dessert-bar' ? (
           /* =================== LUXURY DESSERT BAR PAGE =================== */
           <DessertBarPage onOpenQuote={(summary) => handleOpenQuote(summary)} />
         ) : currentPage === 'set-menu' ? (
